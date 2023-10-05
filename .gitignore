@@ -1,0 +1,9 @@
+node_modules
+.DS_Store
+/dist/*
+/src/users.tsx
+/src/customComponents/*
+/cypress/videos
+/cypress/screenshots
+*.iml
+.env
