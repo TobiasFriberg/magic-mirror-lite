@@ -15,8 +15,9 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: aliases,
+    roots: [__dirname, path.resolve(__dirname, '/src')],
   },
-  entry: path.resolve(__dirname, 'index'),
+  entry: path.resolve(__dirname, '/src/index'),
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'index.js',
@@ -37,6 +38,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: './index.html',
+      cache: false,
     }),
   ],
 };

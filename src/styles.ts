@@ -5,6 +5,21 @@ export const Content = styled.div`
   justify-content: space-between;
 `;
 
+export const Group = styled.div`
+  margin-top: 20px;
+`;
+
+export const BottomPosition = styled.div`
+  width: 100vw;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const ClockWrapper = styled.div`
   display: flex;
 `;
@@ -91,12 +106,16 @@ export const WeatherForecastTitle = styled.div`
   margin-top: 1em;
 `;
 
-export const NewsContent = styled.div`
-  margin: 3em 0;
-  position: absolute;
-  bottom: 0;
+export const LargeText = styled.div`
+  font-size: 5em;
+`;
 
-  width: 100vw;
+export const MediumText = styled.div`
+  font-size: 2em;
+`;
+
+export const NewsContent = styled.div`
+  margin: 1.5em 0;
 `;
 
 export const NewsTitle = styled.div`
@@ -176,16 +195,16 @@ export const PokemonName = styled.div`
   z-index: 1;
 `;
 
-export const PokemonWrapper = styled.div`
+export const PokemonWrapper = styled.div<{ size?: string }>`
   margin-top: 2em;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  width: ${(p) => (!p.size ? 'auto' : p.size)};
 
   img {
     position: relative;
     z-index: 0;
-    width: 80%;
+    width: 100%;
     margin-top: -20%;
-    margin-left: 10%;
   }
 `;
 

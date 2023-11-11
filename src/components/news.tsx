@@ -13,7 +13,6 @@ type News = {
 };
 
 const MAX_NEWS_ARTICLES = 8;
-
 const READ_TIMEOUT = 15000;
 
 type NewsProps = {
@@ -63,10 +62,14 @@ export const News = ({ rss }: NewsProps) => {
   return (
     <NewsContent>
       <NewsTitle>
-        <FadingText text={news[rssNumber].title} timeout={READ_TIMEOUT - 2000} />
+        <FadingText timeout={READ_TIMEOUT - 2000} loop>
+          {news[rssNumber].title}
+        </FadingText>
       </NewsTitle>
       <NewsArticle>
-        <FadingText text={news[rssNumber].items[newsArticleNumber].title} timeout={READ_TIMEOUT - 2000} />
+        <FadingText timeout={READ_TIMEOUT - 2000} loop>
+          {news[rssNumber].items[newsArticleNumber].title}
+        </FadingText>
       </NewsArticle>
     </NewsContent>
   );

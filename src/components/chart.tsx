@@ -1,3 +1,4 @@
+// Experimental, for testing purpose
 import React, { useEffect, useState } from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
@@ -30,7 +31,7 @@ const dataTemplate = {
   ],
 };
 
-const AMOUNT_OF_DAYS_TO_FETCH = 10;
+const AMOUNT_OF_DAYS_TO_FETCH = 5;
 
 export const Chart = () => {
   const [data, setData] = useState();
@@ -55,12 +56,16 @@ export const Chart = () => {
     }
 
     const fetchedData = await Promise.all(
-      datesToFetch
-        .reverse()
-        .map((d) => fetchData(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/${d}/currencies/btc.min.json`))
+      datesToFetch.reverse().map(async (d) => {
+        try {
+          return await fetchData(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/${d}/currencies/btc.min.json`);
+        } catch {
+          return null;
+        }
+      })
     );
 
-    const washedData = fetchedData.map((data) => data.btc.usd);
+    const washedData = fetchedData.filter((data) => data).map((data) => data.btc.usd);
     const newData: any = dataTemplate;
 
     let lastNumber = 0;

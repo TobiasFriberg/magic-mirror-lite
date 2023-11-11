@@ -30,11 +30,13 @@
     "eslint": "^8.17.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "html-webpack-plugin": "^5.5.0",
+    "pi-camera": "^1.7.0",
     "react": "^18.1.0",
     "react-chartjs-2": "^5.1.0",
     "react-dom": "^18.1.0",
     "react-feather": "^2.0.10",
     "react-router-dom": "^6.3.0",
+    "react-webcam": "^7.2.0",
     "rss-to-json": "^2.1.0",
     "styled-components": "^5.3.5",
     "typescript": "^4.8.4",
@@ -43,5 +45,8 @@
     "webpack-dev-server": "^4.9.2",
     "webpack-merge": "^5.8.0",
     "webpack-node-externals": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/pi-camera": "^1.5.5"
   }
 }

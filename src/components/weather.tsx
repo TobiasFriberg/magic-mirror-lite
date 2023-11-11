@@ -2,7 +2,7 @@ import { format, fromUnixTime } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 /*@ts-ignore */
 import * as Unicons from '@iconscout/react-unicons';
-import { Wind, Sunrise, Sunset, AlignCenter, Cloud, CloudLightning, CloudRain, CloudSnow, Sun } from 'react-feather';
+import { Sunrise, Sunset } from 'react-feather';
 import {
   WeatherWrapper,
   WeatherHeader,
