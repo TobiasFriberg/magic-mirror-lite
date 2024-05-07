@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import { FadingTextContent } from '../styles';
+import { FadingTextContent } from './fadingText.style';
 
 type FadingTextProps = {
   timeout?: number;

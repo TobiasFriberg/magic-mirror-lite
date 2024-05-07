@@ -1,6 +1,6 @@
 import { differenceInDays, isBefore } from 'date-fns';
 import React from 'react';
-import { MediumText } from '../styles';
+import { MediumText } from '../../styles';
 
 type DaysCountdownProps = {
   month: number;
@@ -18,7 +18,7 @@ export const DaysCountdown = ({ day, month, prefix = '', suffix = '' }: DaysCoun
       parsedDate = new Date(`${date.getFullYear() + 1}/${month}/${day}`);
     }
 
-    return differenceInDays(parsedDate, date);
+    return differenceInDays(parsedDate, date) + 1;
   };
 
   const getDays = () => <b>{getDaysTil()}</b>;

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { CurrencyInfo, CurrencyTitle } from '../styles';
+import { CurrencyInfo, CurrencyTitle } from './crypto.style';
 
 type CurrencyProps = {
   code: string;
   title: string;
 };
 
-export const Currency = ({ code, title }: CurrencyProps) => {
+export const Crypto = ({ code, title }: CurrencyProps) => {
   const [currency, setCurrency] = useState<any>();
   useEffect(() => {
     updateCurrency();

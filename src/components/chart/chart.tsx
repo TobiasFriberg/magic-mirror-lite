@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { format } from 'date-fns';
-import { ChartTitle, ChartWrapper } from '../styles';
+import { ChartTitle, ChartWrapper } from './chart.style';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 ChartJS.defaults.color = 'white';

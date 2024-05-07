@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { PokemonName, PokemonTitle, PokemonWrapper } from '../styles';
+import { PokemonName, PokemonTitle, PokemonWrapper } from './pokemon.style';
 
 type PokemonProps = {
   size?: string;

@@ -1,7 +1,7 @@
 import { parse } from 'rss-to-json';
 import React, { useEffect, useState } from 'react';
-import { NewsContent, NewsTitle, NewsArticle } from '../styles';
-import { FadingText } from './fadingText';
+import { NewsContent, NewsTitle, NewsArticle } from './news.style';
+import { FadingText } from '../fadingText/fadingText';
 
 type News = {
   title: string;
@@ -51,6 +51,7 @@ export const News = ({ rss }: NewsProps) => {
 
   const updateNews = async () => {
     const promises = rss.map(async (url) => await parse(url));
+    console.log(promises);
     const rssNews = await Promise.all(promises);
     setNews(rssNews);
   };

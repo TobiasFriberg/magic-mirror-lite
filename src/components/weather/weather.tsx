@@ -12,7 +12,7 @@ import {
   WeatherForecastList,
   WeatherForecastFeelsLike,
   WeatherForecastItem,
-} from '../styles';
+} from './weather.style';
 
 type WeatherInfoType = {
   time: number;
@@ -38,6 +38,7 @@ type WeatherProps = {
 
 export const Weather = ({ id }: WeatherProps) => {
   const [weather, setWeather] = useState<WeatherType>();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     updateWeather();
@@ -73,34 +74,39 @@ export const Weather = ({ id }: WeatherProps) => {
   };
 
   const updateWeather = async () => {
-    const currentWeatherData = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?id=${id}&units=metric&appid=${WEATHER_APP_TOKEN}`
-    );
-    const responseCurrent = await currentWeatherData.json();
+    try {
+      const currentWeatherData = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?id=${id}&units=metric&appid=${WEATHER_APP_TOKEN}`
+      );
+      const responseCurrent = await currentWeatherData.json();
 
-    const forecastWeatherData = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?id=${id}&units=metric&appid=${WEATHER_APP_TOKEN}`
-    );
-    const responseForecast = await forecastWeatherData.json();
+      const forecastWeatherData = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?id=${id}&units=metric&appid=${WEATHER_APP_TOKEN}`
+      );
+      const responseForecast = await forecastWeatherData.json();
 
-    const currentData = {
-      name: `${responseCurrent.name}, ${responseCurrent.sys.country}`,
-      current: {
-        time: responseCurrent.dt,
-        temp: responseCurrent.main.temp.toFixed(1),
-        temp_min: responseCurrent.main.temp_min.toFixed(1),
-        temp_max: responseCurrent.main.temp_max.toFixed(1),
-        feels_like: responseCurrent.main.feels_like.toFixed(1),
-        wind_speed: Math.round(responseCurrent.wind.speed),
-        sunrise: responseCurrent.sys.sunrise,
-        sunset: responseCurrent.sys.sunset,
-        icon: responseCurrent.weather[0].icon,
-      },
-    };
+      const currentData = {
+        name: `${responseCurrent.name}, ${responseCurrent.sys.country}`,
+        current: {
+          time: responseCurrent.dt,
+          temp: responseCurrent.main.temp.toFixed(1),
+          temp_min: responseCurrent.main.temp_min.toFixed(1),
+          temp_max: responseCurrent.main.temp_max.toFixed(1),
+          feels_like: responseCurrent.main.feels_like.toFixed(1),
+          wind_speed: Math.round(responseCurrent.wind.speed),
+          sunrise: responseCurrent.sys.sunrise,
+          sunset: responseCurrent.sys.sunset,
+          icon: responseCurrent.weather[0].icon,
+        },
+      };
 
-    const forecastData = getForecastForDays(responseForecast.list);
+      const forecastData = getForecastForDays(responseForecast.list);
 
-    setWeather({ ...currentData, forecast: forecastData });
+      setWeather({ ...currentData, forecast: forecastData });
+      setLoading(false);
+    } catch (_e) {
+      setLoading(false);
+    }
   };
 
   const getWeatherIcon = (icon: string) => {
@@ -139,6 +145,10 @@ export const Weather = ({ id }: WeatherProps) => {
         </WeatherForecastItem>
       );
     });
+
+  if (!weather && !loading) {
+    return <span>Weather widget not loaded correctly...</span>;
+  }
 
   return (
     <WeatherWrapper>

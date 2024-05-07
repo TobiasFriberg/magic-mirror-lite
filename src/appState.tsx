@@ -1,7 +1,6 @@
-import React, { useState, createContext, useContext, ReactNode } from 'react';
-
-const users: string[] = [];
-
+import { getHours } from 'date-fns';
+import React, { useState, createContext, useContext, ReactNode, useEffect } from 'react';
+import { usersConfig } from './users.example';
 export interface IAppContext {
   user: string;
 }
@@ -12,7 +11,7 @@ interface IState {
 }
 
 const initState: IAppContext = {
-  user: '',
+  user: 'day',
 };
 
 const AppCtx = createContext<IState>({
@@ -29,11 +28,28 @@ type AppStateProviderType = {
 export const AppStateProvider = ({ children }: AppStateProviderType) => {
   const [appState, updateAppState] = useState<IAppContext>(initState);
 
-  const setAppState = (newState: IAppContext) => {
-    if (!users.includes(newState.user)) {
-      newState.user = '';
-    }
+  useEffect(() => {
+    setInterval(() => {
+      let configToSet = '';
+      const date = new Date();
+      const hour = date.getHours();
+      const minute = date.getMinutes();
+      Object.entries(usersConfig).forEach((user) => {
+        const configKey = user[0];
+        const startAt = usersConfig[configKey].startAt;
 
+        if (startAt && hour >= startAt?.hour && minute >= startAt?.minute) {
+          configToSet = configKey;
+        }
+      });
+
+      if (configToSet !== appState.user) {
+        setAppState({ user: configToSet });
+      }
+    }, 30000);
+  }, []);
+
+  const setAppState = (newState: IAppContext) => {
     const updatedState = { ...appState, ...newState };
     updateAppState(updatedState);
   };
