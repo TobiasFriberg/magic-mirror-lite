@@ -11,7 +11,7 @@ interface IState {
 }
 
 const initState: IAppContext = {
-  user: 'day',
+  user: '',
 };
 
 const AppCtx = createContext<IState>({
